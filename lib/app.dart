@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wifi_List_Test_Task/core/styles/app_theme.dart';
+import 'package:wifi_List_Test_Task/features/wifi/presentation/bloc/wifi_options_cubit/wifi_options_cubit.dart';
+import 'package:wifi_List_Test_Task/features/wifi/presentation/pages/wifi_screen.dart';
+import 'package:wifi_List_Test_Task/injection/injection.dart';
 import 'package:wifi_List_Test_Task/l10n/l10n.dart';
 
 part 'providers.dart';
@@ -43,8 +46,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: providers,
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
+      child:  MaterialApp(
         theme: AppTheme.main,
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -52,6 +54,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
+        home: const WifiScreen(),
       ),
     );
   }
