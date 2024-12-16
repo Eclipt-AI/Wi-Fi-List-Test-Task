@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -7,119 +8,181 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'WLAN Verbindung',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const WifiScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class WifiScreen extends StatefulWidget {
+  const WifiScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<WifiScreen> createState() => _WifiScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _WifiScreenState extends State<WifiScreen> {
+  // Initial list of WiFi networks
+  final List<Map<String, dynamic>> _initialNetworks = [
+    {'name': 'Workspace-WLAN', 'strength': 4, 'isClickable': true},
+    {'name': 'XYZ-WLAN', 'strength': 3, 'isClickable': true},
+    {'name': 'Freifunk', 'strength': 2, 'isClickable': false},
+    {'name': 'Telekom_FON', 'strength': 4, 'isClickable': false},
+    {'name': 'FRITZ!Box 7590', 'strength': 3, 'isClickable': false},
+    {'name': 'Vodafone Hotspot', 'strength': 2, 'isClickable': false},
+  ];
 
-  void _incrementCounter() {
+  late List<Map<String, dynamic>> _networks;
+  bool _isRefreshing = false;
+  String? _selectedNetwork;
+  final TextEditingController _passwordController = TextEditingController();
+  bool _obscurePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _networks = List.from(_initialNetworks);
+  }
+
+  void _refreshNetworks() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _isRefreshing = true;
     });
+
+    // Simulate network refresh
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        // Shuffle existing networks
+        _networks.shuffle();
+
+        // Randomly add a new network
+        if (Random().nextBool()) {
+          _networks.add({
+            'name': 'Neues Netzwerk ${Random().nextInt(100)}',
+            'strength': Random().nextInt(4) + 1,
+            'isClickable': false,
+          });
+        }
+
+        _isRefreshing = false;
+      });
+    });
+  }
+
+  void _showPasswordDialog(String networkName) {
+    setState(() {
+      _selectedNetwork = networkName;
+      _passwordController.clear();
+    });
+
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: Text('Verbinden mit $networkName'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _passwordController,
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  labelText: 'Passwort',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _showSuccessMessage();
+                },
+                child: const Text('Verbinden'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showSuccessMessage() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Erfolgreich mit $_selectedNetwork verbunden!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  Widget _buildWifiIcon(int strength) {
+    IconData icon;
+    switch (strength) {
+      case 4:
+        icon = Icons.signal_wifi_4_bar;
+        break;
+      case 3:
+        icon = Icons.signal_wifi_4_bar;
+        break;
+      case 2:
+        icon = Icons.signal_wifi_4_bar;
+        break;
+      default:
+        icon = Icons.signal_wifi_4_bar;
+    }
+    return Icon(icon);
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text('WLAN Verbindung'),
+        actions: [
+          IconButton(
+            icon: _isRefreshing
+                ? const CircularProgressIndicator(color: Colors.white)
+                : const Icon(Icons.refresh),
+            onPressed: _isRefreshing ? null : _refreshNetworks,
+          ),
+        ],
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: _networks.length,
+        itemBuilder: (context, index) {
+          final network = _networks[index];
+          return ListTile(
+            leading: _buildWifiIcon(network['strength']),
+            title: Text(network['name']),
+            onTap: network['isClickable']
+                ? () => _showPasswordDialog(network['name'])
+                : null,
+            enabled: network['isClickable'],
+          );
+        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
   }
 }
