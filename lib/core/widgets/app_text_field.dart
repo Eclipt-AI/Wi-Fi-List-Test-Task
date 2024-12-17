@@ -64,38 +64,7 @@ class AppTextFieldState extends State<AppTextField> {
       obscureText: widget.isPassword ? _obscureText : false,
       onChanged: _onChangedHandler,
       decoration: InputDecoration(
-        filled: true,
-        fillColor: AppColors.grey,
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(31.0)),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(31.0)),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(31.0)),
-          borderSide: BorderSide.none,
-        ),
-        errorBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(31.0)),
-          gapPadding: 0,
-          borderSide: BorderSide(color: AppColors.grey),
-        ),
-        disabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(31.0)),
-          borderSide: BorderSide.none,
-        ),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 16,
-        ),
         hintText: widget.hintText,
-        hintStyle: AppTextStyles.textHelper,
-        labelStyle: AppTextStyles.textHelper,
-        errorStyle: const TextStyle(height: 0),
-        // to remove padding caused by validator text
         suffixIcon: widget.suffixIcon ??
             (widget.isPassword
                 ? Container(

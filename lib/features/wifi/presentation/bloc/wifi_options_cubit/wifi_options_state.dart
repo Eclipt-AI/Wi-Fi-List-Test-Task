@@ -5,7 +5,6 @@ class WifiOptionsState with _$WifiOptionsState {
   const factory WifiOptionsState({
     @Default([]) List<WifiNetwork> networks,
     @Default(false) bool isRefreshing,
-    String? selectedNetwork,
-    @Default(true) bool obscurePassword,
+    @Default([]) List<Rect> positions,
   }) = _WifiOptionsState;
 }

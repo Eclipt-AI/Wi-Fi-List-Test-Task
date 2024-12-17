@@ -70,7 +70,6 @@ class _EnterPasswordDialogState extends State<EnterPasswordDialog> {
                       context.l10n.password,
                       style: AppTextStyles.dialogTitle,
                     ),
-                    const SizedBox(height: 8),
                   ],
                 ),
               ),
