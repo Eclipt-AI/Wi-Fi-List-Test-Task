@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/bloc/wifi_options_cubit/wifi_options_cubit.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/pages/widgets/network_item.dart';
+import 'package:wifi_List_Test_Task/l10n/l10n.dart';
 
 class WifiScreen extends StatefulWidget {
   const WifiScreen({super.key});
@@ -26,17 +27,17 @@ class _WifiScreenState extends State<WifiScreen> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Willkommen!',
-                      style: TextStyle(
+                    Text(
+                      context.l10n.welcome,
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 24,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      'Lass uns beginnen indem wir uns mit einem WLAN verbinden.',
-                      style: TextStyle(fontSize: 16),
+                    Text(
+                      context.l10n.lets_start_by_connecting_to_a_wifi_network,
+                      style: const TextStyle(fontSize: 16),
                     ),
                     AnimatedList(
                       key: _listKey,
@@ -83,7 +84,7 @@ class _WifiScreenState extends State<WifiScreen> {
                                   color: Colors.white,
                                 ),
                           label: Text(
-                            state.isRefreshing ? 'Laden...' : 'Neu Laden',
+                            state.isRefreshing ? context.l10n.loading : context.l10n.reload,
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),

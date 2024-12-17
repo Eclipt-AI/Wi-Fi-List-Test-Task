@@ -18,37 +18,37 @@ class WifiOptionsCubit extends Cubit<WifiOptionsState> {
   final List<WifiNetwork> _initialNetworks = [
     const WifiNetwork(
       name: 'Workspace-WLAN',
-      strength: 4,
+      iconIndex: 0,
       isClickable: true,
       isLocked: false,
     ),
     const WifiNetwork(
       name: 'XYZ-WLAN',
-      strength: 3,
+      iconIndex: 3,
       isClickable: true,
       isLocked: false,
     ),
     const WifiNetwork(
       name: 'Freifunk',
-      strength: 2,
+      iconIndex: 2,
       isClickable: false,
       isLocked: false,
     ),
     const WifiNetwork(
       name: 'Telekom_FON',
-      strength: 4,
+      iconIndex: 0,
       isClickable: false,
       isLocked: false,
     ),
     const WifiNetwork(
       name: 'FRITZ!Box 7590',
-      strength: 3,
+      iconIndex: 3,
       isClickable: false,
       isLocked: false,
     ),
     const WifiNetwork(
       name: 'Vodafone Hotspot',
-      strength: 2,
+      iconIndex: 2,
       isClickable: false,
       isLocked: false,
     ),
@@ -72,7 +72,7 @@ class WifiOptionsCubit extends Cubit<WifiOptionsState> {
       shuffledNetworks.add(
         WifiNetwork(
           name: 'Neues Netzwerk ${Random().nextInt(100)}',
-          strength: Random().nextInt(4) + 1,
+          iconIndex: Random().nextInt(4),
           isClickable: false,
           isLocked: Random().nextBool(),
         ),

@@ -48,6 +48,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       providers: providers,
       child:  MaterialApp(
         theme: AppTheme.main,
+        locale: const Locale('de'),
+        supportedLocales: const [Locale('de')],
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

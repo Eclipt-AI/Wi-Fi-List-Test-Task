@@ -6,7 +6,7 @@ part 'wifi_network.freezed.dart';
 class WifiNetwork with _$WifiNetwork {
   const factory WifiNetwork({
     required String name,
-    required int strength,
+    required int iconIndex,
     required bool isClickable,
     required bool isLocked,
   }) = _WifiNetwork;

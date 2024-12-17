@@ -1,16 +1,18 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wifi_List_Test_Task/core/media/app_icons.dart';
+import 'package:wifi_List_Test_Task/features/wifi/domain/models/wifi_network.dart';
 
 class WifiIcon extends StatelessWidget {
-  const WifiIcon({super.key});
+  final WifiNetwork network;
+
+  const WifiIcon({
+    required this.network,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final option = Random().nextInt(4);
-    switch (option) {
+    switch (network.iconIndex) {
       case 0:
         return Image.asset(
           AppIcons.wifiSignalLocked1,

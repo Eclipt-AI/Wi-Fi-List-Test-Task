@@ -82,7 +82,7 @@ class _NetworkItemState extends State<NetworkItem> {
     return SizeTransition(
       sizeFactor: widget.animation,
       child: ListTile(
-        leading: const WifiIcon(),
+        leading: WifiIcon(network: widget.network),
         title: Text(widget.network.name),
         onTap: widget.network.isClickable ? () => _showPasswordDialog(widget.network.name) : null,
         enabled: widget.network.isClickable,
