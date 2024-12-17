@@ -4,7 +4,10 @@
   "lets_start_by_connecting_to_a_wifi_network": "Lass uns beginnen indem wir uns mit einem WLAN verbinden.",
   "reload": "Neu laden",
   "connect_to_wifi": "Mit einem WLAN verbinden",
-  "the_device_is_trying_to_connect_to": "Das Gerät versucht sich mit zu verbinden mit: Workspace-WLAN\nBitte gib dein Passwort für das Netzwerk hier ein:",
+  "the_device_is_trying_to_connect_to": "Das Gerät versucht sich mit zu verbinden mit: ",
   "password": "Passwort",
-  "loading": "Laden..."
+  "loading": "Laden...",
+  "connect": "Verbinden",
+  "connect_to_a_wlan": "Mit einem WLAN verbinden",
+  "please_enter_your_network_password_here": "Bitte gib dein Passwort für das Netzwerk hier ein: "
 }

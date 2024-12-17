@@ -31,25 +31,25 @@ class WifiOptionsCubit extends Cubit<WifiOptionsState> {
     const WifiNetwork(
       name: 'Freifunk',
       iconIndex: 2,
-      isClickable: false,
+      isClickable: true,
       isLocked: false,
     ),
     const WifiNetwork(
       name: 'Telekom_FON',
       iconIndex: 0,
-      isClickable: false,
+      isClickable: true,
       isLocked: false,
     ),
     const WifiNetwork(
       name: 'FRITZ!Box 7590',
       iconIndex: 3,
-      isClickable: false,
+      isClickable: true,
       isLocked: false,
     ),
     const WifiNetwork(
       name: 'Vodafone Hotspot',
       iconIndex: 2,
-      isClickable: false,
+      isClickable: true,
       isLocked: false,
     ),
   ];
@@ -73,7 +73,7 @@ class WifiOptionsCubit extends Cubit<WifiOptionsState> {
         WifiNetwork(
           name: 'Neues Netzwerk ${Random().nextInt(100)}',
           iconIndex: Random().nextInt(4),
-          isClickable: false,
+          isClickable: true,
           isLocked: Random().nextBool(),
         ),
       );
