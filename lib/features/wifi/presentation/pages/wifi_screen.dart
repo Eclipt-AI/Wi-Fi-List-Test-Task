@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wifi_List_Test_Task/core/media/app_icons.dart';
 import 'package:wifi_List_Test_Task/core/media/app_images.dart';
-import 'package:wifi_List_Test_Task/core/styles/app_text_styles.dart';
 import 'package:wifi_List_Test_Task/core/styles/app_colors.dart';
+import 'package:wifi_List_Test_Task/core/styles/app_text_styles.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/bloc/wifi_options_cubit/wifi_options_cubit.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/pages/widgets/network_item.dart';
 import 'package:wifi_List_Test_Task/l10n/l10n.dart';
@@ -96,7 +96,9 @@ class _WifiScreenState extends State<WifiScreen> {
                           ),
                           onPressed: state.isRefreshing
                               ? null
-                              : () => context.read<WifiOptionsCubit>().refreshNetworks(),
+                              : () => context.read<WifiOptionsCubit>().refreshNetworks(
+                                    _listKey.currentState!,
+                                  ),
                           icon: state.isRefreshing
                               ? const SizedBox(
                                   width: 16,

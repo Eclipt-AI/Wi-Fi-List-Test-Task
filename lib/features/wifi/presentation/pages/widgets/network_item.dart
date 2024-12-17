@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wifi_List_Test_Task/core/styles/app_text_styles.dart';
 import 'package:wifi_List_Test_Task/features/wifi/domain/models/wifi_network.dart';
-import 'package:wifi_List_Test_Task/features/wifi/presentation/bloc/wifi_options_cubit/wifi_options_cubit.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/pages/widgets/enter_password_dialog.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/pages/widgets/wifi_icon.dart';
-import 'package:wifi_List_Test_Task/l10n/l10n.dart';
 
 class NetworkItem extends StatelessWidget {
   final WifiNetwork network;
@@ -19,8 +16,14 @@ class NetworkItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizeTransition(
-      sizeFactor: animation,
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: const Offset(1.0, 0.0),
+        end: Offset.zero,
+      ).animate(CurvedAnimation(
+        parent: animation,
+        curve: Curves.easeOut,
+      )),
       child: ListTile(
         leading: WifiIcon(network: network),
         title: Text(

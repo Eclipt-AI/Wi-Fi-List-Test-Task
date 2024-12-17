@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:wifi_List_Test_Task/features/wifi/domain/models/wifi_network.dart';
@@ -22,48 +23,48 @@ class WifiOptionsCubit extends Cubit<WifiOptionsState> {
       isClickable: true,
       isLocked: false,
     ),
-    const WifiNetwork(
-      name: 'XYZ-WLAN',
-      iconIndex: 3,
-      isClickable: true,
-      isLocked: false,
-    ),
-    const WifiNetwork(
-      name: 'Freifunk',
-      iconIndex: 2,
-      isClickable: true,
-      isLocked: false,
-    ),
-    const WifiNetwork(
-      name: 'Telekom_FON',
-      iconIndex: 0,
-      isClickable: true,
-      isLocked: false,
-    ),
-    const WifiNetwork(
-      name: 'FRITZ!Box 7590',
-      iconIndex: 3,
-      isClickable: true,
-      isLocked: false,
-    ),
-    const WifiNetwork(
-      name: 'Vodafone Hotspot',
-      iconIndex: 2,
-      isClickable: true,
-      isLocked: false,
-    ),
+    // const WifiNetwork(
+    //   name: 'XYZ-WLAN',
+    //   iconIndex: 3,
+    //   isClickable: true,
+    //   isLocked: false,
+    // ),
+    // const WifiNetwork(
+    //   name: 'Freifunk',
+    //   iconIndex: 2,
+    //   isClickable: true,
+    //   isLocked: false,
+    // ),
+    // const WifiNetwork(
+    //   name: 'Telekom_FON',
+    //   iconIndex: 0,
+    //   isClickable: true,
+    //   isLocked: false,
+    // ),
+    // const WifiNetwork(
+    //   name: 'FRITZ!Box 7590',
+    //   iconIndex: 3,
+    //   isClickable: true,
+    //   isLocked: false,
+    // ),
+    // const WifiNetwork(
+    //   name: 'Vodafone Hotspot',
+    //   iconIndex: 2,
+    //   isClickable: true,
+    //   isLocked: false,
+    // ),
   ];
 
   void _initializeNetworks() {
     emit(state.copyWith(networks: _initialNetworks));
   }
 
-  Future<void> refreshNetworks() async {
+  Future<void> refreshNetworks(AnimatedListState animatedListState) async {
     emit(state.copyWith(isRefreshing: true));
 
     await Future.delayed(const Duration(seconds: 1));
 
-    final shuffledNetworks = List<WifiNetwork>.from(_initialNetworks)..shuffle();
+    final shuffledNetworks = _initialNetworks;
 
     if (Random().nextBool()) {
       shuffledNetworks.add(
@@ -74,23 +75,12 @@ class WifiOptionsCubit extends Cubit<WifiOptionsState> {
           isLocked: Random().nextBool(),
         ),
       );
+      animatedListState.insertItem(shuffledNetworks.length - 1);
     }
 
     emit(state.copyWith(
       networks: shuffledNetworks,
       isRefreshing: false,
     ));
-  }
-
-  void selectNetwork(String networkName) {
-    emit(state.copyWith(selectedNetwork: networkName));
-  }
-
-  void togglePasswordVisibility() {
-    emit(state.copyWith(obscurePassword: !state.obscurePassword));
-  }
-
-  void clearSelectedNetwork() {
-    emit(state.copyWith(selectedNetwork: null));
   }
 }
