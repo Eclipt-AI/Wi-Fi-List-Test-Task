@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wifi_List_Test_Task/core/media/app_text_styles.dart';
+import 'package:wifi_List_Test_Task/core/styles/app_text_styles.dart';
 import 'package:wifi_List_Test_Task/features/wifi/domain/models/wifi_network.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/bloc/wifi_options_cubit/wifi_options_cubit.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/pages/widgets/enter_password_dialog.dart';

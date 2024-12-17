@@ -61,13 +61,10 @@ class WifiOptionsCubit extends Cubit<WifiOptionsState> {
   Future<void> refreshNetworks() async {
     emit(state.copyWith(isRefreshing: true));
 
-    // Simulate network refresh delay
     await Future.delayed(const Duration(seconds: 1));
 
-    // Shuffle existing networks
     final shuffledNetworks = List<WifiNetwork>.from(_initialNetworks)..shuffle();
 
-    // Potentially add a new network
     if (Random().nextBool()) {
       shuffledNetworks.add(
         WifiNetwork(

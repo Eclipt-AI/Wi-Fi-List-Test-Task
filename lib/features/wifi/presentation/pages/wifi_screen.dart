@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wifi_List_Test_Task/core/media/app_icons.dart';
 import 'package:wifi_List_Test_Task/core/media/app_images.dart';
-import 'package:wifi_List_Test_Task/core/media/app_text_styles.dart';
+import 'package:wifi_List_Test_Task/core/styles/app_text_styles.dart';
 import 'package:wifi_List_Test_Task/core/styles/app_colors.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/bloc/wifi_options_cubit/wifi_options_cubit.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/pages/widgets/network_item.dart';
@@ -26,7 +26,7 @@ class _WifiScreenState extends State<WifiScreen> {
       child: Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 195),
+            padding: const EdgeInsets.symmetric(horizontal: 75),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -52,6 +52,7 @@ class _WifiScreenState extends State<WifiScreen> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const Spacer(),
                         Text(
                           context.l10n.welcome,
                           style: AppTextStyles.title,
@@ -118,6 +119,7 @@ class _WifiScreenState extends State<WifiScreen> {
                             ),
                           ),
                         ),
+                        const Spacer(),
                       ],
                     );
                   },

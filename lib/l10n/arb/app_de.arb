@@ -6,6 +6,7 @@
   "connect_to_wifi": "Mit einem WLAN verbinden",
   "the_device_is_trying_to_connect_to": "Das Gerät versucht sich mit zu verbinden mit: ",
   "password": "Passwort",
+  "password_hint": "Passwort...",
   "loading": "Laden...",
   "connect": "Verbinden",
   "connect_to_a_wlan": "Mit einem WLAN verbinden",
