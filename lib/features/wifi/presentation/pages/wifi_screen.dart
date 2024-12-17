@@ -44,7 +44,11 @@ class _WifiScreenState extends State<WifiScreen> {
                       shrinkWrap: true,
                       itemBuilder: (context, index, animation) {
                         final network = state.networks[index];
-                        return NetworkItem(network: network, animation: animation);
+                        return NetworkItem(
+                          network: network,
+                          animation: animation,
+                          key: Key(network.name),
+                        );
                       },
                     ),
                     Padding(

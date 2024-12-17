@@ -5,8 +5,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:wifi_List_Test_Task/features/wifi/domain/models/wifi_network.dart';
 
-part 'wifi_options_state.dart';
 part 'wifi_options_cubit.freezed.dart';
+
+part 'wifi_options_state.dart';
 
 @injectable
 class WifiOptionsCubit extends Cubit<WifiOptionsState> {
@@ -15,12 +16,42 @@ class WifiOptionsCubit extends Cubit<WifiOptionsState> {
   }
 
   final List<WifiNetwork> _initialNetworks = [
-    const WifiNetwork(name: 'Workspace-WLAN', strength: 4, isClickable: true),
-    const WifiNetwork(name: 'XYZ-WLAN', strength: 3, isClickable: true),
-    const WifiNetwork(name: 'Freifunk', strength: 2, isClickable: false),
-    const WifiNetwork(name: 'Telekom_FON', strength: 4, isClickable: false),
-    const WifiNetwork(name: 'FRITZ!Box 7590', strength: 3, isClickable: false),
-    const WifiNetwork(name: 'Vodafone Hotspot', strength: 2, isClickable: false),
+    const WifiNetwork(
+      name: 'Workspace-WLAN',
+      strength: 4,
+      isClickable: true,
+      isLocked: false,
+    ),
+    const WifiNetwork(
+      name: 'XYZ-WLAN',
+      strength: 3,
+      isClickable: true,
+      isLocked: false,
+    ),
+    const WifiNetwork(
+      name: 'Freifunk',
+      strength: 2,
+      isClickable: false,
+      isLocked: false,
+    ),
+    const WifiNetwork(
+      name: 'Telekom_FON',
+      strength: 4,
+      isClickable: false,
+      isLocked: false,
+    ),
+    const WifiNetwork(
+      name: 'FRITZ!Box 7590',
+      strength: 3,
+      isClickable: false,
+      isLocked: false,
+    ),
+    const WifiNetwork(
+      name: 'Vodafone Hotspot',
+      strength: 2,
+      isClickable: false,
+      isLocked: false,
+    ),
   ];
 
   void _initializeNetworks() {
@@ -43,6 +74,7 @@ class WifiOptionsCubit extends Cubit<WifiOptionsState> {
           name: 'Neues Netzwerk ${Random().nextInt(100)}',
           strength: Random().nextInt(4) + 1,
           isClickable: false,
+          isLocked: Random().nextBool(),
         ),
       );
     }

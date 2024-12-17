@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wifi_List_Test_Task/features/wifi/domain/models/wifi_network.dart';
 import 'package:wifi_List_Test_Task/features/wifi/presentation/bloc/wifi_options_cubit/wifi_options_cubit.dart';
+import 'package:wifi_List_Test_Task/features/wifi/presentation/pages/widgets/wifi_icon.dart';
 
 class NetworkItem extends StatefulWidget {
   final WifiNetwork network;
@@ -24,10 +25,6 @@ class _NetworkItemState extends State<NetworkItem> {
   void dispose() {
     _passwordController.dispose();
     super.dispose();
-  }
-
-  Widget _buildWifiIcon(int strength) {
-    return const Icon(Icons.signal_wifi_4_bar);
   }
 
   void _showSuccessMessage(String networkName) {
@@ -85,7 +82,7 @@ class _NetworkItemState extends State<NetworkItem> {
     return SizeTransition(
       sizeFactor: widget.animation,
       child: ListTile(
-        leading: _buildWifiIcon(widget.network.strength),
+        leading: const WifiIcon(),
         title: Text(widget.network.name),
         onTap: widget.network.isClickable ? () => _showPasswordDialog(widget.network.name) : null,
         enabled: widget.network.isClickable,

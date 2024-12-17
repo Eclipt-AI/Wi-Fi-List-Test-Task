@@ -8,5 +8,6 @@ class WifiNetwork with _$WifiNetwork {
     required String name,
     required int strength,
     required bool isClickable,
+    required bool isLocked,
   }) = _WifiNetwork;
 }
