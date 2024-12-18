@@ -10,5 +10,6 @@
   "loading": "Laden...",
   "connect": "Verbinden",
   "connect_to_a_wlan": "Mit einem WLAN verbinden",
+  "success": "Erfolg!",
   "please_enter_your_network_password_here": "Bitte gib dein Passwort für das Netzwerk hier ein: "
 }

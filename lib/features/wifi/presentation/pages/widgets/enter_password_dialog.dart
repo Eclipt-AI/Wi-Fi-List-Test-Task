@@ -18,16 +18,20 @@ class EnterPasswordDialog extends StatefulWidget {
 }
 
 class _EnterPasswordDialogState extends State<EnterPasswordDialog> {
-  final TextEditingController _passwordController = TextEditingController();
-
-  void _showSuccessMessage(String networkName) {
+  void _onConnect() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Erfolgreich mit $networkName verbunden!'),
-        backgroundColor: Colors.green,
+        content: Text(
+          context.l10n.success,
+          style: AppTextStyles.refresh,
+        ),
+        duration: const Duration(seconds: 2),
       ),
     );
+    Navigator.of(context).pop(); // Close the dialog after showing success
   }
+
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +82,27 @@ class _EnterPasswordDialogState extends State<EnterPasswordDialog> {
                 hintText: context.l10n.password_hint,
                 keyboardType: TextInputType.visiblePassword,
                 isPassword: true,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(31.0),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 4,
+                  ),
+                ),
+                onPressed: _onConnect,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    context.l10n.connect,
+                    style: AppTextStyles.refresh,
+                  ),
+                ),
               ),
             ],
           ),
